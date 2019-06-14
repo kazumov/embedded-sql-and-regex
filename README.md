@@ -10,7 +10,7 @@ We'll study this problem with two the most popular foreign code embedding: SQL a
 
 ## The SQL code
 
-Let's study the possibilities of embedding SQL and RegEx strings in sourcecode in PHP and Swift programming languages. Both languages allows to use string object as the source of SQL or RegEx instruction. Both languages permits simplified:
+Let's study the possibilities of embedding SQL and RegEx strings in sourcecode in PHP and Swift programming languages. Both languages allows to use string object as the source of SQL or RegEx instruction.
 
 Example from source code on PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
 
