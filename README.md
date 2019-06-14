@@ -14,13 +14,13 @@ Let's study the possibilities of embedding SQL and RegEx strings in sourcecode i
 
 Example from source code on PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
 
-```{php}
+``` php
 $sql = "SELECT id, firstname, lastname FROM MyGuests";
 ```
 
 Example from source code on Swift ([source](https://www.raywenderlich.com/385-sqlite-with-swift-tutorial-getting-started)):
 
-```{Swift}
+``` swift
 let createTableString = """
 CREATE TABLE Contact(
 Id INT PRIMARY KEY NOT NULL,
@@ -35,7 +35,7 @@ let querySql = "SELECT * FROM Contact WHERE Id = ?;"
 ```
 Example from source code on JS ([source](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp))
 
-```{js}
+``` js
 var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
 ```
 
@@ -43,7 +43,7 @@ To be embedded, the SQL or RegEx code should follow multiple restrictions. For e
 
 For example consider the original version ([source](http://www.mysqltutorial.org/mysql-comment/)) of simple SQL query:
 
-```{SQL}
+``` sql
 /*
     Get sales rep employees
     that reports to Anthony
@@ -66,12 +66,12 @@ WHERE
 
 Embedded in JS source code it would look similar to this piece:
 
-```{JS}
+``` js
 var employeeListSQLString = "SELECT lastName, firstName FROM employees WHERE reportsT = 1143 AND jobTitle = 'Sales Rep';"
 ```
 Because of simplisity this line can be understandale. Then we will try this chunk of SQL:
 
-```{SQL}
+``` sql
 /*
     Report the single product price dispersion
     Source: http://www.mysqltutorial.org/mysql-inner-join.aspx
@@ -99,14 +99,14 @@ WHERE
 
 After its linearization for embedding:
 
-```{JS}
+``` js
 var productPriceDispersionSQL = "SELECT orderNumber, productName, msrp, priceEach FROM products p INNER JOIN orderdetails o ON p.productcode = o.productcode AND p.msrp > o.priceEach WHERE p.productcode = %productCode%;"
 ```
 
 
 Also, the embedded code loses its functionality. For example, this SQL code utilizes the functionality of version dependent command:
 
-```{SQL}
+``` sql
 CREATE TABLE t1 (
     k INT AUTO_INCREMENT,
     KEY (k)
@@ -119,7 +119,7 @@ CREATE TABLE t1 (
 
 The process of embedding catastrophically uglifyjs the RegEx code. The original source of multi-line and rich commented RegEx code can be reanable and understandable from the first sight ([source](https://www.regular-expressions.info/freespacing.html)):
 
-```{RegEx}
+``` RegEx
 #
 # Match a 20th or 21st century date in 
 # yyyy-mm-dd format
@@ -133,12 +133,13 @@ The process of embedding catastrophically uglifyjs the RegEx code. The original 
 
 An embedding of the code above inside a JS string, transforms it into "write-only" version:
 
-```{js}
+``` js
 var dateMatchRegEx = "(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])"
 ```
 
 In the code below, the reader can notice the `http` marker in this piece of JS code:
-```{js}
+
+``` js
 var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
 
 ```
