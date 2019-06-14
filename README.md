@@ -10,15 +10,16 @@ We'll study this problem with two the most popular foreign code embedding: SQL a
 
 ## The SQL code
 
-Let's study the possibilities of embedding SQL and RegEx strings in sourcecode in PHP and Swift programming languages. Both languages allows to use string object as the source of SQL or RegEx instruction.
+The PHP, Swift and JS permit embedding the SQL strings in source code. All the listed languages allows to use character string object as the source of SQL instruction.
 
-Example from source code on PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
+There is an example from source code, written on PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
 
 ``` php
 $sql = "SELECT id, firstname, lastname FROM MyGuests";
 ```
 
-Example from source code on Swift ([source](https://www.raywenderlich.com/385-sqlite-with-swift-tutorial-getting-started)):
+There is an example from Swift source code ([source](https://www.raywenderlich.com/385-sqlite-with-swift-tutorial-getting-started)):
+
 
 ``` swift
 let createTableString = """
@@ -33,13 +34,14 @@ let deleteStatementStirng = "DELETE FROM Contact WHERE Id = 1;"
 let malformedQueryString = "SELECT Stuff from Things WHERE Whatever;"
 let querySql = "SELECT * FROM Contact WHERE Id = ?;"
 ```
-Example from source code on JS ([source](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp))
+
+One more example from source code, written on JS ([source](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp))
 
 ``` js
 var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
 ```
 
-To be embedded, the SQL or RegEx code should follow multiple restrictions. For example, an embedded code should not have any comments. Also, included in source code, the SQL code, as well as RegEx code cannot be nicely formatted and immediate loosing its native readability:
+To be embedded, the SQL expression should follow multiple restrictions. For example, an embedded code must exclude any comments. Also, included in source code, the SQL expressions cannot be nicely formatted and immediate loosing its native readability:
 
 For example consider the original version ([source](http://www.mysqltutorial.org/mysql-comment/)) of simple SQL query:
 
@@ -69,7 +71,7 @@ Embedded in JS source code it would look similar to this piece:
 ``` js
 var employeeListSQLString = "SELECT lastName, firstName FROM employees WHERE reportsT = 1143 AND jobTitle = 'Sales Rep';"
 ```
-Because of simplisity this line can be understandale. Then we will try this chunk of SQL:
+Because of simplisity this line can be understandale. For the comparison we will try this piece of SQL code:
 
 ``` sql
 /*
@@ -103,8 +105,9 @@ After its linearization for embedding:
 var productPriceDispersionSQL = "SELECT orderNumber, productName, msrp, priceEach FROM products p INNER JOIN orderdetails o ON p.productcode = o.productcode AND p.msrp > o.priceEach WHERE p.productcode = %productCode%;"
 ```
 
+One can notice, that the complexity of reading the line increased dramatically.
 
-Also, the embedded code loses its functionality. For example, this SQL code utilizes the functionality of version dependent command:
+Also, the embedded code can lose its functionality. For example, this SQL code utilizes the functionality of version dependent command:
 
 ``` sql
 CREATE TABLE t1 (
@@ -114,10 +117,11 @@ CREATE TABLE t1 (
 ```
 
 
-
 # The RegEx code
 
-The process of embedding catastrophically uglifyjs the RegEx code. The original source of multi-line and rich commented RegEx code can be reanable and understandable from the first sight ([source](https://www.regular-expressions.info/freespacing.html)):
+The process of embedding catastrophically increases the complexity of the RegEx code understanding. 
+
+For example, the original source of multi-line and rich commented RegEx code can be readable and understandable from the first sight ([source](https://www.regular-expressions.info/freespacing.html)):
 
 ``` RegEx
 #
