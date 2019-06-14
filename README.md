@@ -2,23 +2,23 @@
 
 ## Abstract
 
-A server-side application code written on any particular language often contains pieces of code written on different, foreign language. The foreign language code embedding produces sufficient additional functionality to the application.
+A server-side application code written in any particular language often contains pieces of code written in different, foreign language. The foreign language code embedding produces sufficient additional functionality to the application.
 
-Since the languages are using different syntax, the embedding process creates sufficient difficulties for the utilization all the foreing language syntax features in particular source code.  
+Since the languages are using different syntax, the embedding process creates sufficient difficulties for the utilization of all the foreign language syntax features in particular source code.  
 
-We'll study this problem with two the most popular foreign code embedding: SQL and RegEx.
+We'll study this problem with two most popular foreign code embedding: SQL and RegEx.
 
 ## The SQL code
 
-The PHP, Swift and JS permit embedding the SQL strings in source code. All the listed languages allows to use character string object as the source of SQL instruction.
+PHP, Swift and JS permit embedding the SQL strings in source code. All the listed languages allow to use character string object as the source of SQL instruction.
 
-There is an example from source code, written on PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
+Here is an example from source code, written in PHP ([source](https://www.w3schools.com/php/php_mysql_select.asp)):
 
 ``` php
 $sql = "SELECT id, firstname, lastname FROM MyGuests";
 ```
 
-There is an example from Swift source code ([source](https://www.raywenderlich.com/385-sqlite-with-swift-tutorial-getting-started)):
+Here is an example from Swift source code ([source](https://www.raywenderlich.com/385-sqlite-with-swift-tutorial-getting-started)):
 
 
 ``` swift
@@ -35,13 +35,13 @@ let malformedQueryString = "SELECT Stuff from Things WHERE Whatever;"
 let querySql = "SELECT * FROM Contact WHERE Id = ?;"
 ```
 
-One more example from source code, written on JS ([source](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp))
+One more example from source code, written in JS ([source](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp))
 
 ``` js
 var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
 ```
 
-To be embedded, the SQL expression should follow multiple restrictions. For example, an embedded code must exclude any comments. Also, included in source code, the SQL expressions cannot be nicely formatted and immediate loosing its native readability:
+To be embedded, the SQL expression should follow multiple restrictions. For example, an embedded code must exclude any comments. Also, included in the source code, the SQL expressions cannot be nicely formatted and immediately loose their native readability:
 
 For example consider the original version ([source](http://www.mysqltutorial.org/mysql-comment/)) of simple SQL query:
 
@@ -71,7 +71,8 @@ Embedded in JS source code it would look similar to this piece:
 ``` js
 var employeeListSQLString = "SELECT lastName, firstName FROM employees WHERE reportsT = 1143 AND jobTitle = 'Sales Rep';"
 ```
-Because of simplisity this line can be understandale. For the comparison we will try this piece of SQL code:
+
+Because of its simplicity this line can be understandable. For comparison we will try this piece of SQL code:
 
 ``` sql
 /*
@@ -107,7 +108,7 @@ var productPriceDispersionSQL = "SELECT orderNumber, productName, msrp, priceEac
 
 One can notice, that the complexity of reading the line increased dramatically.
 
-Also, the embedded code can lose its functionality. For example, this SQL code utilizes the functionality of version dependent command:
+Also, the embedded code can lose its functionality. For example, this SQL code utilizes the functionality of version-dependent command:
 
 ``` sql
 CREATE TABLE t1 (
@@ -121,7 +122,7 @@ CREATE TABLE t1 (
 
 The process of embedding catastrophically increases the complexity of the RegEx code understanding. 
 
-For example, the original source of multi-line and rich commented RegEx code can be readable and understandable from the first sight ([source](https://www.regular-expressions.info/freespacing.html)):
+For example, the original source of multi-line and richly commented RegEx code can be readable and understandable from the first sight ([source](https://www.regular-expressions.info/freespacing.html)):
 
 ``` RegEx
 #
@@ -147,12 +148,10 @@ In the code below, the reader can notice the `http` marker in this piece of JS c
 var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
 
 ```
-The marker `http` may give a hint about the source of expression, but it is impossible to recognize the details of the rest of expression string.
+The marker `http` may give a hint about the source of expression, but it is impossible to recognize the details of the rest of the expression string.
 
 # The solution
 
-One should avoid to embed any foreign code in the native source code.
+One should avoid embedding any foreign code in the native source code.
 
-One can store the foreign code, like SQL or RegEx in external files or storage.
-
-One should use class-like wrappers to recall or extract the source from the native file or resource. 
+One can store the foreign code, like SQL or RegEx, in external files or storage, and use class-like wrappers to recall or extract the source from the native file or resource. 
