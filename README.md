@@ -52,7 +52,7 @@ For example consider the original version ([source](http://www.mysqltutorial.org
         none
 
     Returns:
-        List of emploees
+        List of employees
 */
  
 SELECT 
@@ -143,7 +143,7 @@ In the code below, the reader can notice the `http` marker in this piece of JS c
 var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
 
 ```
-The marker `http` may give hint about the source, but it is impossible to recognize the details of the rest.
+The marker `http` may give a hint about the source of expression, but it is impossible to recognize the details of the rest of expression string.
 
 # The solution
 
